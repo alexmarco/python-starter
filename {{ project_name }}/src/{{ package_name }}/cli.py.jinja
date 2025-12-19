@@ -31,5 +31,18 @@ def main():
 
     logger.info("CLI finished.")
 
+
+def cli_entrypoint():
+    """
+    Console script entry point.
+
+    This ensures centralized logging is initialized when the package is executed
+    via the installed console script.
+    """
+    from .logging_config import setup_logging
+
+    setup_logging()
+    main()
+
 if __name__ == "__main__":
     main()
