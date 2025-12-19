@@ -1,0 +1,66 @@
+# {{ project_name }}
+
+{{ project_description }}
+
+## Getting Started
+
+This project is managed with `uv`.
+
+### Prerequisites
+
+- Python 3.9+
+- `uv` (can be installed with `pip install uv`)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd {{ project_name }}
+   ```
+
+2. Create a virtual environment and install dependencies:
+   ```bash
+   uv venv
+   uv pip install -e ".[dev{% if use_docs %},docs{% endif %}]"
+   ```
+
+### Usage
+
+- **Run the application:**
+  ```bash
+  uv run {{ package_name }}
+  ```
+
+- **Run linters and type checkers:**
+  ```bash
+  uv run ruff check .
+  uv run pyrefly check
+  ```
+
+- **Run tests:**
+  ```bash
+  uv run pytest
+  ```
+
+{% if use_precommit %}
+### Pre-commit Hooks
+
+This project uses `pre-commit` to enforce code quality. To install the hooks, run:
+```bash
+pre-commit install
+```
+{% endif %}
+
+{% if use_docs %}
+### Documentation
+
+To build and serve the documentation locally, run:
+```bash
+mkdocs serve
+```
+{% endif %}
+
+## License
+
+This project is licensed under the {{ license }} License. See the `LICENSE` file for details.

@@ -1,0 +1,17 @@
+# {{ package_name }}/__main__.py
+import logging
+{% if use_cli %}
+from .cli import main
+{% else %}
+def main():
+    """Main function for the application."""
+    logger = logging.getLogger(__name__)
+    logger.info("Application starting.")
+    print("Hello, world!")
+    logger.info("Application finished.")
+{% endif %}
+
+if __name__ == "__main__":
+    from .logging_config import setup_logging
+    setup_logging()
+    main()
