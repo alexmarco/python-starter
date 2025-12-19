@@ -36,7 +36,7 @@ docs = [
 
 [project.scripts]
 {% if use_cli %}
-{{ package_name }} = "{{ package_name }}.cli:main"
+{{ package_name }} = "{{ package_name }}.cli:cli_entrypoint"
 {% endif %}
 
 [tool.ruff]
