@@ -1,0 +1,35 @@
+# {{ package_name }}/cli.py
+import argparse
+import logging
+
+
+def main():
+    """
+    The main function for the command-line interface.
+    """
+    parser = argparse.ArgumentParser(description="{{ project_description }}")
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable verbose logging."
+    )
+    # Add your CLI arguments here
+    # Example:
+    # parser.add_argument("name", help="Your name.")
+
+    args = parser.parse_args()
+
+    # Set logging level based on verbose flag
+    logger = logging.getLogger("{{ package_name }}")
+    logger.setLevel(logging.DEBUG if args.verbose else logging.INFO)
+
+    logger.info("CLI started.")
+
+    # Your CLI logic goes here
+    # Example:
+    # print(f"Hello, {args.name}!")
+
+    logger.info("CLI finished.")
+
+if __name__ == "__main__":
+    main()

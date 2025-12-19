@@ -1,0 +1,69 @@
+# copier.yml
+_jinja_extensions:
+  - jinja2.ext.loopcontrols
+  - jinja2.ext.do
+
+project_name:
+  type: str
+  help: What is the name of the project?
+  default: my-awesome-project
+
+project_description:
+  type: str
+  help: What is the description of the project?
+  default: A cool new project.
+
+author_name:
+  type: str
+  help: What is your name?
+  default: Your Name
+
+author_email:
+  type: str
+  help: What is your email?
+  default: your@email.com
+
+project_type:
+  type: str
+  help: Is this a library or an application?
+  choices:
+    - library
+    - application
+  default: application
+
+use_cli:
+  type: bool
+  help: Do you want to include a CLI?
+  default: yes
+
+use_cicd:
+  type: bool
+  help: Do you want to include a CI/CD pipeline (GitHub Actions)?
+  default: yes
+
+use_precommit:
+  type: bool
+  help: Do you want to include pre-commit hooks?
+  default: yes
+
+license:
+  type: str
+  help: Which license do you want to use?
+  choices:
+    - MIT
+    - Apache-2.0
+  default: MIT
+
+use_docs:
+  type: bool
+  help: Do you want to include documentation with MkDocs?
+  default: yes
+
+package_name:
+  type: str
+  default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
+
+_tasks:
+  - git init .
+  - git add .
+  - git commit -m "Initial commit from copier template"

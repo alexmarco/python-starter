@@ -1,0 +1,10 @@
+# {{ package_name }}/__init__.py
+__version__ = "0.1.0"
+
+{% if project_type == 'library' %}
+# Set up a null handler for the library's logger.
+# This prevents the library from outputting log messages if the consuming
+# application has not configured logging.
+import logging
+logging.getLogger(__name__).addHandler(logging.NullHandler())
+{% endif %}

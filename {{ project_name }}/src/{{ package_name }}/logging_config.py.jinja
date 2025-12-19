@@ -1,0 +1,62 @@
+# {{ package_name }}/logging_config.py
+import logging
+import logging.config
+import time
+
+
+class MillisecondFormatter(logging.Formatter):
+    """Custom formatter that includes milliseconds with 3 digits."""
+
+    def formatTime(self, record, datefmt=None):
+        """Format time with milliseconds."""
+        ct = self.converter(record.created)
+        if datefmt:
+            s = time.strftime(datefmt, ct)
+            # Replace %f with 3-digit milliseconds
+            s = s.replace('%f', f'{int(record.msecs):03d}')
+        else:
+            s = time.strftime(self.default_time_format, ct)
+            if self.default_msec_format:
+                s = self.default_msec_format % (s, record.msecs)
+        return s
+
+
+# Robust logging configuration using dictionary
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "class": "{{ package_name }}.logging_config.MillisecondFormatter",
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S.%f",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+            "level": "INFO",
+            "stream": "ext://sys.stdout",
+        },
+        # Uncomment to add file logging
+        # "file": {
+        #     "class": "logging.FileHandler",
+        #     "formatter": "standard",
+        #     "level": "DEBUG",
+        #     "filename": "app.log",
+        # },
+    },
+    "loggers": {
+        "{{ package_name }}": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+
+def setup_logging():
+    """Setup logging configuration."""
+    logging.config.dictConfig(LOGGING_CONFIG)
