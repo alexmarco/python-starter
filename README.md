@@ -40,7 +40,7 @@ To create a new Python project based on this template:
 3. Run the following command in the template's root directory:
 
 ```bash
-uvx copier copy . /path/to/new/project
+uvx copier copy --trust . /path/to/new/project
 ```
 
 ### Option 2: Directly from Git repository
@@ -48,7 +48,7 @@ uvx copier copy . /path/to/new/project
 If the template is hosted on a Git repository (e.g., GitHub), you can copy it directly without cloning:
 
 ```bash
-uvx copier copy https://github.com/alexmarco/python-starter /path/to/new/project
+uvx copier copy --trust https://github.com/alexmarco/python-starter /path/to/new/project
 ```
 
 uvx allows running Copier without installing it globally.
