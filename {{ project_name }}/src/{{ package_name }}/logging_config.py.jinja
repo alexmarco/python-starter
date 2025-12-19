@@ -27,7 +27,7 @@ LOGGING_CONFIG = {
     "disable_existing_loggers": False,
     "formatters": {
         "standard": {
-            "class": "logging_config.MillisecondFormatter",
+            "class": "{{ package_name }}.logging_config.MillisecondFormatter",
             "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S.%f",
         },
